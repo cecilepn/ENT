@@ -157,6 +157,11 @@ h2 {
     text-decoration: underline;
 }
 
+.blocDate{
+    display: flex;
+    align-items: center;
+}
+
 /* section 3 : actualités */
 
 .actualite {

@@ -69,7 +69,7 @@ include ("db_connect.php");
 
                 <div class='acces'>
                     <a class='btnAcces' href='cours.php?id_rsc={$cours["ext_ressource"]}'> Accéder </a>
-                    <a href=''><svg xmlns='http://www.w3.org/2000/svg' width='256' height='256' viewBox='0 0 256 256'><g transform='rotate(45 128 128)'><path fill='currentColor' d='M208.49 120.49a12 12 0 0 1-17 0L140 69v147a12 12 0 0 1-24 0V69l-51.51 51.49a12 12 0 0 1-17-17l72-72a12 12 0 0 1 17 0l72 72a12 12 0 0 1 0 17'/></g></svg>
+                    <a href=''><iconify-icon icon='eva:diagonal-arrow-right-up-fill' width='50' ></iconify-icon>
 <span class='sr-only'> accès cours </span></a>
                 </div>
             </div> " 
@@ -275,6 +275,7 @@ include ("footer.php");
 
 
 <script src="script.js"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 </body>
 
 

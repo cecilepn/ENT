@@ -49,26 +49,26 @@ include ("header.php");
         <div class="containRecent">
             <div class="frame">
                 <a href=""> Prochain cours : <span> intégration </span> </a>
-                <div>
+                <div class="blocDate">
                     <p> <span> date </span></p>
-                    <a href="planning.php"> <img src="img/fleche.png" alt=""> <span class="sr-only"> Vers planning </span></a>
+                    <a href="planning.php"> <iconify-icon icon='eva:diagonal-arrow-right-up-fill' width='50' ></iconify-icon> <span class="sr-only"> Vers planning </span></a>
                 </div>
             </div>
 
             <div class="frame">
                 <a href=""> Prochain cours : <span> intégration </span> </a>
-                <div>
+                <div class="blocDate">
                     <p> <span> date </span></p>
-                    <a href="planning.php"> <img src="img/fleche.png" alt=""> <span class="sr-only"> Vers planning </span></a>
+                    <a href="planning.php"> <iconify-icon icon='eva:diagonal-arrow-right-up-fill' width='50' ></iconify-icon><span class="sr-only"> Vers planning </span></a>
                 </div>
             </div>
             
 
             <div class="frame">
                 <a href=""> Prochain cours : <span> intégration </span> </a>
-                <div>
+                <div class="blocDate">
                     <p> <span> date </span></p>
-                    <a href="planning.php"> <img src="img/fleche.png" alt=""> <span class="sr-only"> Vers planning </span></a>
+                    <a href="planning.php"> <iconify-icon icon='eva:diagonal-arrow-right-up-fill' width='50' ></iconify-icon> <span class="sr-only"> Vers planning </span></a>
                 </div>
             </div>
 
@@ -237,7 +237,7 @@ foreach ($resultat as $art) {
 include ("footer.php");
 ?>
 
-
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 <script src="script.js"></script>
 </body>
 
