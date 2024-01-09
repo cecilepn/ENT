@@ -1,0 +1,81 @@
+section {
+    margin: 56px 104px;
+}
+
+h1 {
+    font-size: 5em;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 56px 0;
+}
+
+h2 {
+    font-size: 2em;
+    font-weight: 700;
+
+    border: solid 1px var(--black);
+    border-radius: 16px;
+    width: 40%;
+    padding: 16px 56px;
+}
+
+.containCours {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+}
+
+.blocCours {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 80%;
+    gap: 40px;
+}
+
+.bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bottom p {
+    color: var(--green);
+}
+
+h3 {
+    font-size: 1.5em;
+}
+
+.doc {
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+}
+
+.doc a {
+    color: var(--black);
+    border: solid 1px var(--black);
+    border-radius: 16px;
+    padding: 8px 16px;
+}
+
+.doc a:hover {
+    background-color: var(--green);
+    color: var(--beige);
+}
+
+
+.btn a {
+    color: var(--black);
+    border: solid 1px var(--black);
+    width: 200px;
+    padding: 16px 80px;
+    border-radius: 90px;
+}
+
+.btn a:hover {
+    color: var(--beige);
+    background-color: var(--black);
+}

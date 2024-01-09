@@ -1,0 +1,111 @@
+.article {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+    margin: 56px 104px;
+}
+
+.artTitre {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.artTitre p {
+    font-size: 1em;
+    color: var(--green);
+}
+
+
+.art {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    gap: 32px;
+    width: 100%;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin: 0 auto;
+    width: 50%;
+}
+
+.photo {
+    width: 50%;
+    height: auto;
+    flex-shrink: 0;
+    border-radius: 20px;
+    margin: 0 auto;
+}
+
+/* section articles recommandés */
+
+.recommendation {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    gap: 56px;
+    margin: 56px auto;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+h3 {
+    font-size: 2.5em;
+    margin-left: 104px;
+}
+
+.blocArt img {
+    width: 150px;
+    height: auto;
+    border-radius: 20px;
+}
+
+.blocArt {
+    display: flex;
+    gap: 16px;
+}
+
+.blocText {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+h4 {
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.date {
+    display: flex;
+    justify-content: space-between;
+    color: var(--green);
+}
+
+.date a {
+    color: var(--black);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.date a:hover {
+    text-decoration: underline;
+}

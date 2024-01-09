@@ -1,0 +1,247 @@
+/* landing title */
+.blocTitre {
+    padding: 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+h1 {
+    font-size: 6em;
+}
+
+h2 {
+    font-size: 2em;
+    font-weight: 500;
+    width: 500px;
+}
+
+/* filter css */
+
+.containFiltres {
+    display: flex;
+    gap: 24px;
+}
+
+.filtre {
+    color: inherit;
+    background-color: inherit;
+
+    border: solid 1px;
+    border-color: inherit;
+    border-radius: 56px;
+    padding: 16px 64px;
+}
+
+.filtre:hover {
+    color: inherit;
+    background-color: var(--purple);
+}
+
+/* section cours et tp */
+
+
+.premier {
+    display: flex;
+    flex-direction: column;
+
+    gap: 56px;
+    padding: 0px 96px;
+}
+
+h3 {
+    font-size: 3.5em;
+    font-weight: 800;
+}
+
+/* bloc tp */
+
+.tps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 24px;
+}
+
+.blocTp {
+    background-color: var(--green);
+    color: var(--beige);
+
+    width: 280px;
+    padding: 24px;
+    border-radius: 16px;
+    border: solid 1px var(--black);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+h4 {
+    font-size: 2em;
+    font-weight: 700;
+}
+
+.acces {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btnAcces {
+    color: var(--beige);
+    border: solid 1px var(--beige);
+    border-radius: 32px;
+    padding: 16px 24px;
+}
+
+.btnAcces:hover {
+    background-color: var(--beige);
+    color: var(--green);
+}
+
+.acces img {
+    width: 20px;
+    height: 20px;
+}
+
+/* bloc cours */
+
+.cours {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 24px;
+}
+
+.blocCours {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    border: solid 1px;
+    border-color: inherit;
+    border-radius: 20px;
+}
+
+.blocCours img {
+    width: 100%;
+    height: 270px;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+
+    padding: 0px 16px 24px 16px;
+}
+
+.btn {
+    border: solid 1px var(--black);
+    color: var(--black);
+
+    border-radius: 32px;
+    width: 140px;
+    text-align: center;
+    padding: 16px 24px;
+}
+
+.btn:hover {
+    color: var(--beige);
+    background-color: var(--black);
+}
+
+/* section agenda */
+
+h5 {
+    font-size: 5em;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.blocTitre p {
+    font-size: 1.5em;
+}
+
+.agenda {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+    margin-bottom: 100px;
+}
+
+.titleAgenda {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 96px;
+}
+
+.icons {
+    display: flex;
+    gap: 56px;
+
+}
+
+
+h6 {
+    font-size: 4em;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+/* bloc planning */
+
+.planning {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 40px;
+    padding: 0px 96px;
+
+}
+
+.blocDevoir {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.jour {
+    font-size: 2em;
+    font-weight: 700;
+}
+
+.devTitre {
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.contenu {
+    background-color: var(--purple);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 64px;
+
+    width: 280px;
+    height: auto;
+    padding: 24px;
+
+    border-radius: 16px;
+
+    text-align: center;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}

@@ -1,0 +1,187 @@
+/* general setup */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+section {
+    height: 100%;
+
+}
+
+body {
+    background-color: var(--beige);
+}
+
+/* accessibilité */
+
+.sr-only {
+    border: 0 !important;
+    clip: rect(1px, 1px, 1px, 1px) !important;
+    -webkit-clip-path: inset(50%) !important;
+    clip-path: inset(50%) !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    width: 1px !important;
+    white-space: nowrap !important;
+}
+
+
+/* colors */
+
+:root {
+    --black: #353736;
+    --beige: #FFF6EC;
+    --purple: #D6C5F3;
+    --orange: #FF906F;
+    --green: #4A7D53;
+}
+
+/* thème sombre / clair */
+.clair {
+    background-color: var(--beige);
+    color: var(--black);
+}
+
+.sombre {
+    background-color: var(--black);
+    color: var(--beige);
+}
+
+svg {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+/* Quand le thème sombre est activé */
+
+#themeSwitch {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+#themeSwitch+svg {
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+#themeSwitch:checked+.sun {
+    display: none;
+}
+
+#themeSwitch:checked+.moon {
+    display: block;
+}
+
+/* fonts */
+
+body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+/* nav bar css */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 2em;
+    border-bottom: 1px solid;
+    border-color: inherit;
+}
+
+nav a {
+    text-decoration: none;
+    color: inherit;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.item {
+    color: var(--black);
+}
+
+nav {
+    display: flex;
+    gap: 56px;
+}
+
+.containNav {
+    display: flex;
+    align-items: center;
+    gap: 72px;
+    padding-right: 104px;
+}
+
+.logo {
+    padding-left: 104px;
+}
+
+.pp {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.deco {
+    color: var(--orange);
+}
+
+.deco:hover {
+    text-decoration: underline;
+}
+
+/* css a */
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* footer css */
+
+footer {
+    background-color: var(--black);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    height: 245px;
+}
+
+.footerNav a {
+    color: var(--beige);
+}
+
+.credit {
+    color: var(--beige);
+    font-size: 0.8em;
+    font-weight: 200;
+}
+
+footer hr {
+    width: 1000px;
+}

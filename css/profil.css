@@ -1,0 +1,168 @@
+section {
+    height: 150vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 104px;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+
+    width: 290px;
+    height: 245px;
+
+    border: solid 1px var(--black);
+    border-radius: 16px;
+
+}
+
+.bloc {
+    display: flex;
+    gap: 16px;
+    padding: 0 16px;
+    align-items: center;
+}
+
+.bloc a {
+    color: var(--orange);
+}
+
+.bloc a:hover {
+    text-decoration: underline;
+}
+
+/* right side */
+
+h1 {
+    font-size: 3em;
+    text-align: center;
+    margin-top: 24px;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+
+}
+
+.parametres {
+    display: flex;
+    flex-direction: column;
+
+    gap: 32px;
+
+}
+
+.profil {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.profil img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.profil p {
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+/* form section */
+
+.formContain {
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    gap: 16px;
+}
+
+.position {
+    display: flex;
+    gap: 16px;
+    align-items: flex-end;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.info input {
+    width: 300px;
+    height: 48px;
+    border-radius: 8px;
+    border: solid 1px var(--black);
+    padding-left: 16px;
+}
+
+.adresse input {
+    width: 600px;
+}
+
+/* docs section */
+h2 {
+    margin-bottom: 16px;
+}
+
+.docs {
+    display: flex;
+    gap: 32px;
+}
+
+.doc {
+    display: flex;
+    gap: 64px;
+
+    border: var(--black) solid 2px;
+    padding: 16px 32px;
+    border-radius: 16px;
+
+    align-items: center;
+}
+
+.doc a {
+    color: var(--black);
+    border: solid 1px #E6E8EC;
+    border-radius: 32px;
+    padding: 8px 24px;
+}
+
+.doc a:hover {
+    background-color: var(--green);
+    color: var(--beige);
+    transition: 0.5s;
+}
+
+/* btn css */
+
+.btn {
+    border: solid 1px var(--black);
+    color: var(--black);
+
+    border-radius: 16px;
+    width: 140px;
+    text-align: center;
+    padding: 16px 24px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    color: var(--beige);
+    background-color: var(--black);
+    transition: 0.3s;
+}

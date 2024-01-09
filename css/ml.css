@@ -1,0 +1,66 @@
+section {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 104px;
+    gap: 64px;
+    margin-bottom: 100px;
+}
+
+h1 {
+    font-size: 4em;
+    margin-top: 100px;
+    color: var(--orange);
+    text-align: center;
+}
+
+h2 {
+    font-size: 2em;
+    color: var(--orange);
+}
+
+.text {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.bloc {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+h3 {
+    font-size: 1.5em;
+}
+
+
+ul {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+li {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.btn a {
+    border: solid 1px;
+    border-color: inherit;
+    width: 200px;
+    padding: 16px 80px;
+    border-radius: 90px;
+    color: inherit;
+}
+
+.btn a:hover {
+    color: inherit;
+    background-color: var(--orange);
+}
