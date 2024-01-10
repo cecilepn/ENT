@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ENT - MMI</title>
     <link rel="stylesheet" href="general.css">
+
+
+    <!-- Swiper JS -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+
     <link rel="stylesheet" href="index.css">
     <link rel="icon" type="image/png" href="./img/logo.png" />
 
@@ -73,7 +81,8 @@ include ("header.php");
             </div>
 
             <div class="frame2">
-                <a href="ressources.php"> Accès aux ressources </a> <img src="img/fleche.svg" alt="">
+                <a href="ressources.php"> Accès aux ressources </a> 
+                <a href="ressources.php"> <span class="sr-only"> Accès aux ressources </span> <iconify-icon icon='eva:diagonal-arrow-right-up-fill' width='25' ></iconify-icon></a> 
             </div>
         </div>
 
@@ -90,34 +99,33 @@ include ("header.php");
             <a href="" class="filtre violet"> IUT </a>
             <a href="" class="filtre orange"> MMI </a>
         </div>
+        
+        
+        <div class="containNews swiper mySwipe">
+    <div class="swiper-wrapper">
+        <?php
+        $requete = "SELECT * FROM `actualite` ORDER BY `actualite`.`date_actu` DESC";
+        $stmt = $db->query($requete);
+        $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        <div class="containNews">
+        foreach ($resultat as $art) {
+            // Utiliser substr pour obtenir un extrait du contenu
+            $extrait = substr($art["contenu_actu"], 0, 300);
 
-
-        <?php         
-            $requete = "SELECT * FROM `actualite` ORDER BY `actualite`.`date_actu` DESC LIMIT 3";
-            $stmt = $db->query($requete);
-            $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-foreach ($resultat as $art) {      
-    // Utiliser substr pour obtenir un extrait du contenu
-    $extrait = substr($art["contenu_actu"], 0, 300); 
-
-    echo ("
-        <div class='new'>
-            <div>
-                <h4>{$art["titre"]}</h4>
-                <p>{$extrait}</p>
-            </div>
-            <a href='article.php?id_actu={$art["id_actu"]}'>Lire plus...</a>
-        </div>
-    "); 
-} 
-?>
-        </div>
-
-
-        <img src="img/slider.png" alt="" class="slider">
+            echo ("
+                <div class='swiper-slide'>
+                    <div class='new'>
+                        <h4>{$art["titre"]}</h4>
+                        <p>{$extrait}</p>
+                        <a href='article.php?id_actu={$art["id_actu"]}'>Lire plus...</a>
+                    </div>
+                </div>
+            ");
+        }
+        ?>
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
     </section>
 
     <section class="videos">
@@ -235,7 +243,10 @@ foreach ($resultat as $art) {
 include ("footer.php");
 ?>
 
+<!-- CDN iconify -->
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+ <!-- Lien script js -->
 <script src="script.js"></script>
 </body>
 

@@ -37,72 +37,47 @@ include ("db_connect.php");
         <h3> Derniers cours ajoutés </h3>
 
         <div class='tps'>
-       <?php         
-        
-        $requete="SELECT * FROM cours ORDER BY date_ajout DESC LIMIT 4";
-        $stmt=$db->query($requete);
-        $resultat=$stmt->fetchall(PDO::FETCH_ASSOC);
- 
-        setlocale(LC_TIME, 'fr_FR'); // Définir la locale en français
-        
-        
-        foreach ($resultat as $cours) { 
-    // Convertir la date en format timestamp si elle n'est pas déjà sous ce format
-        $timestamp = strtotime($cours["date_ajout"]);
-    
-    // Utiliser la classe DateTime pour formater la date en français
-    $date = new DateTime();
-    $date->setTimestamp($timestamp);
+        <?php
+    // Vérifier si l'utilisateur est connecté
+    $filtre_annee = ""; // Initialiser la variable de filtre
 
-    $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
-    $date_formattee = $formatter->format($date);
+    if (isset($_SESSION["login"])) {
+        // Récupérer la valeur de ext_annee pour l'utilisateur connecté
+        $requete_utilisateur = "SELECT ext_annee FROM utilisateur WHERE user_login=:login";
+        $stmt_utilisateur = $db->prepare($requete_utilisateur);
+        $stmt_utilisateur->bindParam(':login', $_SESSION["login"], PDO::PARAM_STR);
+        $stmt_utilisateur->execute();
 
-       echo  ("
+        // Vérifier si la requête a retourné un résultat
+        if ($stmt_utilisateur->rowCount() == 1) {
+            $utilisateur_info = $stmt_utilisateur->fetch(PDO::FETCH_ASSOC);
+            $filtre_annee = $utilisateur_info["ext_annee"];
+        }
+    }
 
-            <div class='blocTp'>
+    // Requête SQL pour récupérer les ressources filtrées par ext_annee
+    $requete_ressource = "SELECT * FROM ressource WHERE ext_annee = :filtre_annee";
+    $stmt_ressource = $db->prepare($requete_ressource);
+    $stmt_ressource->bindParam(':filtre_annee', $filtre_annee, PDO::PARAM_STR);
+    $stmt_ressource->execute();
 
-            <div>
-                <p> {$date_formattee} </p>
-                <h4>{$cours["nom_cours"]}</h4>
-            </div>
-                <p>{$cours["description"]}</p>
+    $resultat_ressource = $stmt_ressource->fetchAll(PDO::FETCH_ASSOC);
 
-                <div class='acces'>
-                    <a class='btnAcces' href='cours.php?id_rsc={$cours["ext_ressource"]}'> Accéder </a>
-                    <a href=''><iconify-icon icon='eva:diagonal-arrow-right-up-fill' width='50' ></iconify-icon>
-<span class='sr-only'> accès cours </span></a>
-                </div>
-            </div> " 
-
-        );   
-        } ?>
-
-<div class="cours">
-
-<?php         
-        
-        $requete="SELECT * FROM ressource";
-        $stmt=$db->query($requete);
-        $resultat=$stmt->fetchall(PDO::FETCH_ASSOC);
-
-
-
-        foreach ($resultat as $ressource) { 
-           echo ("<div class='blocCours'>
-
+    // Boucle pour afficher les ressources filtrées
+    foreach ($resultat_ressource as $ressource) {
+        echo ("<div class='blocCours'>
                 <div>
                     <img src='{$ressource["url_img"]}' alt=''>
                 </div>
-
                 <div class='desc'>
-                    <h4> {$ressource["nom_rsc"]}</h4>
+                    <h4>{$ressource["nom_rsc"]}</h4>
                     <p>{$ressource["description"]}</p>
                     <a class='btn' href='cours.php?id_rsc={$ressource["id_ressource"]}'> Accéder </a>
                 </div>
-            </div>"); 
-
-} ?>
-</div>
+            </div>");
+    }; 
+?>
+        </div>
 
     </section>
 

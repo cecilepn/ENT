@@ -39,3 +39,13 @@ document.addEventListener('DOMContentLoaded', function () {
     changeThemeIcons(initialTheme);
 });
 
+// slider pour les news (jQuery)
+
+var swiper = new Swiper(".mySwipe", {
+    slidesPerView: 3,
+    spaceBetween: 30,
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+});

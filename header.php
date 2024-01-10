@@ -90,7 +90,7 @@ include ("db_connect.php");
     // Vérifier si l'utilisateur est connecté
     if (isset($_SESSION["login"])) {
         // Récupérer les informations de l'utilisateur depuis la base de données
-        $requete = "SELECT * FROM utilisateur WHERE login=:login";
+        $requete = "SELECT * FROM utilisateur WHERE user_login=:login";
         $stmt = $db->prepare($requete);
         $stmt->bindParam(':login', $_SESSION["login"], PDO::PARAM_STR);
         $stmt->execute();
@@ -100,25 +100,40 @@ include ("db_connect.php");
             $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
 
             ?>
-
-<div>
-        <a href="profil.php">
-            <?php if ($utilisateur["img_profile"] !== NULL) { ?>
-                <img src="<?php echo $utilisateur["img_profile"]; ?>" alt="" class="pp">
-            <?php } else { ?>
-                <div style="width: 70px; height: 70px; background-color: lightgray;"></div>
-            <?php } ?>
-            <span class="sr-only"> Profil </span>
-        </a>
-    </div>
+            <div>
+                <a href="profil.php">
+                    <?php if ($utilisateur["img_profile"] !== NULL) { ?>
+                        <img src="<?php echo $utilisateur["img_profile"]; ?>" alt="" class="pp">
+                    <?php } else { ?>
+                        <div> <iconify-icon icon="iconoir:profile-circle" width="30"></iconify-icon> </div>
+                    <?php } ?>
+                    <span class="sr-only"> Profil </span>
+                </a>
+            </div>
+            <div>
+                <a class="deco" href="logout.php"> Déconnexion </a>
+            </div>
+            <?php
+        // Vérifier si l'utilisateur a le rôle égal à 1 soit admin
+        if ($utilisateur["ext_role"] == 1) {
+            ?>
+            <div>
+                <a class="back" href="./backoffice/backoffice.php"> Backoffice </a>
+            </div>
+            <?php
+        }
+    } 
+} else {
+    // L'utilisateur n'est pas connecté
+    ?>
     <div>
-        <a class="deco" href="logout.php"> Déconnexion </a>
+        <a class="deco" href="connexion.php"> Connexion </a>
     </div>
-
-   <?php
-        } 
-    }
+    <?php
+}
 ?>
-        <script src="script.js"></script>
-    </header>
 
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<script src="script.js"></script>
+
+</header>

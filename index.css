@@ -151,13 +151,15 @@ h2 {
     color: inherit;
     font-weight: 600;
     font-size: 1.2em;
+    display: flex;
+    align-self: flex-end;
 }
 
 .frame2 a:hover {
     text-decoration: underline;
 }
 
-.blocDate{
+.blocDate {
     display: flex;
     align-items: center;
 }
@@ -215,10 +217,46 @@ h3 {
     background-color: var(--orange);
 }
 
+/* slider css */
+
+.swiper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.swiper-slide {
+    width: auto;
+}
+
+/* css pagination */
+
+.swiper-pagination-bullet {
+    width: 20px;
+    height: 20px;
+    background-color: var(--black);
+    border: solid 1px;
+    border-color: var(--beige);
+    opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: var(--orange);
+}
+
+/* css actu */
+
 .containNews {
     display: flex;
     justify-content: space-between;
     gap: 32px;
+}
+
+h4 {
+    font-size: 2em;
+    font-weight: 700;
+    font-style: italic;
+    color: inherit;
 }
 
 .new {
@@ -242,7 +280,7 @@ h3 {
 }
 
 .new a {
-    color: var(--black);
+    color: inherit;
     font-size: 1.2em;
     font-weight: 500;
     text-align: right;

@@ -47,7 +47,7 @@
     // Vérifier si l'utilisateur est connecté
     if (isset($_SESSION["login"])) {
         // Récupérer les informations de l'utilisateur depuis la base de données
-        $requete = "SELECT * FROM utilisateur WHERE login=:login";
+        $requete = "SELECT * FROM utilisateur WHERE user_login=:login";
         $stmt = $db->prepare($requete);
         $stmt->bindParam(':login', $_SESSION["login"], PDO::PARAM_STR);
         $stmt->execute();
@@ -63,7 +63,13 @@
 
                 <div class='parametres'>
                     <div class='profil'>
-                        <div><img src="<?php echo $utilisateur["img_profile"]; ?>" alt="" class="pp">><iconify-icon icon='jam:write' width='32' height='32'></iconify-icon>
+                        <div class="blocPP"><?php if ($utilisateur["img_profile"] !== NULL) { ?>
+                <img src="<?php echo $utilisateur["img_profile"]; ?>" alt="" class="pp-profil">
+            <?php } else { ?>
+              
+                    <iconify-icon icon="iconoir:profile-circle" width="70"></iconify-icon> 
+            <?php } ?>
+            <iconify-icon icon='jam:write' width='32' height='32'></iconify-icon>
                         </div>
                 <?php
                 // Afficher les informations de l'utilisateur
@@ -95,7 +101,7 @@
                     <div class="position">
                         <div class="info">
                             <label>Adresse Mail</label>
-                            <input type="text" placeholder="<?php echo("{$utilisateur["login"]}")?>" name="mail">
+                            <input type="text" placeholder="<?php echo("{$utilisateur["user_login"]}")?>" name="mail">
                         </div>
 
                         <div class="info adresse">

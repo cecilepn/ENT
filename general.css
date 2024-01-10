@@ -124,13 +124,13 @@ nav a:hover {
 
 nav {
     display: flex;
-    gap: 56px;
+    gap: 40px;
 }
 
 .containNav {
     display: flex;
     align-items: center;
-    gap: 72px;
+    gap: 48px;
     padding-right: 104px;
 }
 
@@ -151,6 +151,14 @@ nav {
 }
 
 .deco:hover {
+    text-decoration: underline;
+}
+
+.back {
+    color: var(--green);
+}
+
+.back:hover {
     text-decoration: underline;
 }
 

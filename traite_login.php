@@ -5,7 +5,7 @@ include ("db_connect.php");
 
 $db->query('SET NAMES utf8');
 
-$requete="SELECT * FROM utilisateur WHERE login=:login";
+$requete="SELECT * FROM utilisateur WHERE user_login=:login";
 $stmt=$db->prepare($requete);
 $stmt->bindParam(':login',$_GET["mail"], PDO::PARAM_STR);
 $stmt->execute();
@@ -23,7 +23,7 @@ if ($stmt->rowcount()==1){
 		$_SESSION["tel"]=$result["tel"];
 		$_SESSION["adresse"]=$result["adresse"];
 		$_SESSION["img_profile"]=$result["img_profile"];
-
+		$_SESSION["role"]=$result["ext_role"];
 		
      header ('Location:index.php');
 	} else {header ('Location:connexion.php?err=mdp');}

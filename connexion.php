@@ -44,7 +44,7 @@
                 <input type="text" placeholder="Entrer l'adresse mail" name="mail" required> 
 
                 <?php 
-if (isset($_GET["err"]) && $_GET["err"]=="mail") {;echo "Erreur sur l'adresse mail.";}
+if (isset($_GET["err"]) && $_GET["err"]=="mail") { echo "Erreur sur l'adresse mail.";}
 ?>
 
                 <label>Mot de passe</label>

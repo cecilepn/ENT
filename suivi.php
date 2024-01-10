@@ -23,6 +23,8 @@ include("header.php");
 
 $id_user_connecte = $_SESSION["id"];
 
+
+
 $requete = "SELECT absence.*, prof.* 
             FROM absence
             INNER JOIN prof ON absence.ext_prof = prof.id_prof 
@@ -51,6 +53,7 @@ $resultats = $stmt->fetchAll(PDO::FETCH_ASSOC);
         setlocale(LC_TIME, 'fr_FR');
 
         $totalHeuresAbsences = 0;
+        $totalHeuresFormate = null;
 
         foreach ($resultats as $absence) {
             $dateDebut = new DateTime($absence["date_abs"] . ' ' . $absence["heure_debut"]);
@@ -102,8 +105,14 @@ $resultats = $stmt->fetchAll(PDO::FETCH_ASSOC);
                </div>
            </div>
            <hr>");
-// Formater le total des heures d'absences
-$totalHeuresFormate = sprintf('%02d', floor($totalHeuresAbsences)) . 'h' . sprintf('%02d', ($totalHeuresAbsences * 60) % 60);
+
+           // Formater le total des heures d'absences
+if ($totalHeuresAbsences === null || $totalHeuresAbsences == 0) {
+    $totalHeuresFormate = '0h';
+} else {
+    $totalHeuresFormate = sprintf('%02d', floor($totalHeuresAbsences)) . 'h' . sprintf('%02d', ($totalHeuresAbsences * 60) % 60);
+}
+
         }
 ?>
     </div>
@@ -111,18 +120,32 @@ $totalHeuresFormate = sprintf('%02d', floor($totalHeuresAbsences)) . 'h' . sprin
     <hr>
 
     <div class="totAbs">
-
-        <p>Total d'heures d'absences : <span><?php echo $totalHeuresFormate; ?></span></p>
+    <p>Total d'heures d'absences : <span><?php echo $totalHeuresFormate; ?></span></p>
+</div>
         
-    </div>
-</section>
-
-
 
 
         </div>
 
     </section>
+
+
+<!-- section notes -->
+
+<?php 
+
+$requete = "SELECT note.*, ressource.*, prof.* 
+            FROM note
+            INNER JOIN ressource ON note.ext_ressource = ressource.id_ressource
+            INNER JOIN prof ON note.ext_prof = prof.id_prof
+            WHERE note.ext_user = :id_user";
+
+$stmt = $db->prepare($requete);
+$stmt->bindParam(':id_user', $id_user_connecte, PDO::PARAM_INT);
+$stmt->execute();
+$resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+?>
 
     <section class="notes">
 
@@ -133,109 +156,62 @@ $totalHeuresFormate = sprintf('%02d', floor($totalHeuresAbsences)) . 'h' . sprin
 
         <div class="containerNotes">
 
-            <div class="blocNote">
-                <div class="note">12/20</div>
-                <div class="desc">
-                    <h3>Nom du contrôle</h3>
-                    <div class="descNote">
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia ut nostrum ipsum perferendis
-                            reiciendis eveniet, quas labore enim. Aut sequi doloribus eum maxime maiores iusto eaque
-                            molestias commodi fugit sit!</p>
-                        <p>Ressources 2.01, M.leroy </p>
-                    </div>
-                </div>
+        <?php 
+        // Initialiser les variables pour le calcul de la moyenne
+        $sumProduits = 0;
+        $sumCoefficients = 0;
 
+        foreach ($resultat as $note) {
+            // Note et coefficient de la ressource actuelle
+            $noteRessource = $note["note"];
+            $coeffRessource = $note["coeff"];
+
+            // Calculer la somme pondérée des produits
+            $sumProduits += $noteRessource * $coeffRessource;
+
+            // Calculer la somme totale des coefficients
+            $sumCoefficients += $coeffRessource;
+
+            // Afficher les informations du professeur lié à la note
+            $professeur = $note["nom"] . " " . $note["prenom"];
+
+            // Afficher les informations de la ressource liée à la note
+            $ressource = $note["nom_rsc"];
+
+            echo (" <div class='blocNote'>
+            <div class='note'>{$noteRessource}/20</div>
+            <div class='desc'>
+                <h3>{$note["controle"]}</h3>
+                <div class='descNote'>
+                    <p>{$note["com"]}</p>
+                    <p>{$ressource}, {$professeur}</p>
+                </div>
             </div>
 
-            <div class="blocNote">
-                <div class="note">12/20</div>
-                <div class="desc">
-                    <h3>Nom du contrôle</h3>
-                    <div class="descNote">
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia ut nostrum ipsum perferendis
-                            reiciendis eveniet, quas labore enim. Aut sequi doloribus eum maxime maiores iusto eaque
-                            molestias commodi fugit sit!</p>
-                        <p>Ressources 2.01, M.leroy </p>
-                    </div>
-                </div>
+        </div>"); 
 
-            </div>
+         }; 
 
-            <div class="blocNote">
-                <div class="note">12/20</div>
-                <div class="desc">
-                    <h3>Nom du contrôle</h3>
-                    <div class="descNote">
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia ut nostrum ipsum perferendis
-                            reiciendis eveniet, quas labore enim. Aut sequi doloribus eum maxime maiores iusto eaque
-                            molestias commodi fugit sit!</p>
-                        <p>Ressources 2.01, M.leroy </p>
-                    </div>
-                </div>
+         // Calculer la moyenne générale
+        $moyenneGenerale = ($sumCoefficients > 0) ? round($sumProduits / $sumCoefficients, 2) : 0;
 
-            </div>
-
-            <div class="blocNote">
-                <div class="note">12/20</div>
-                <div class="desc">
-                    <h3>Nom du contrôle</h3>
-                    <div class="descNote">
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia ut nostrum ipsum perferendis
-                            reiciendis eveniet, quas labore enim. Aut sequi doloribus eum maxime maiores iusto eaque
-                            molestias commodi fugit sit!</p>
-                        <p>Ressources 2.01, M.leroy </p>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="blocNote">
-                <div class="note">12/20</div>
-                <div class="desc">
-                    <h3>Nom du contrôle</h3>
-                    <div class="descNote">
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia ut nostrum ipsum perferendis
-                            reiciendis eveniet, quas labore enim. Aut sequi doloribus eum maxime maiores iusto eaque
-                            molestias commodi fugit sit!</p>
-                        <p>Ressources 2.01, M.leroy </p>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="blocNote">
-                <div class="note">12/20</div>
-                <div class="desc">
-                    <h3>Nom du contrôle</h3>
-                    <div class="descNote">
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia ut nostrum ipsum perferendis
-                            reiciendis eveniet, quas labore enim. Aut sequi doloribus eum maxime maiores iusto eaque
-                            molestias commodi fugit sit!</p>
-                        <p>Ressources 2.01, M.leroy </p>
-                    </div>
-                </div>
-
-            </div>
-
+        ?>
+           
 
         </div>
-
-
-        <div class="slider"><img src="img/slider.png" alt=""></div>
 
         <hr>
 
         <div class="recap">
+    <div class="doc">
+        <p>Mon relevé de notes</p>
+        <a href=""> Télécharger </a>
+    </div>
 
-            <div class="doc">
-                <p>Mon relevé de notes</p>
-                <a href=""> Télécharger </a>
-            </div>
-
-            <div class="moyenne">
-                <p>Moyenne générale : <span> 15/20 </span></p>
-            </div>
-        </div>
+    <div class="moyenne">
+        <p>Moyenne générale : <span><?php echo $moyenneGenerale; ?>/20</span></p>
+    </div>
+</div>
     </section>
 
 
