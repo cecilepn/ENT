@@ -42,7 +42,7 @@ h1 {
 .row {
     display: flex;
     justify-content: space-between;
-
+    align-items: center;
 }
 
 .left {
@@ -50,8 +50,12 @@ h1 {
     gap: 32px;
 }
 
-.left img {
+.pp_prof {
     border-radius: 16px;
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    object-position: 100% 0;
 }
 
 .text {
@@ -95,6 +99,19 @@ h1 {
     background-color: var(--green);
     color: var(--beige);
     transition: 0.5s;
+}
+
+.totAbs {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0px 32px;
+}
+
+.totAbs p {
+    font-size: 1.2em;
+    font-weight: 800;
+
 }
 
 /* section notes */

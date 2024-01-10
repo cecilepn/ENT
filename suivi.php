@@ -19,85 +19,105 @@ include ("db_connect.php");
 <?php
 session_start();
 
-include ("header.php");
+include("header.php");
+
+$id_user_connecte = $_SESSION["id"];
+
+$requete = "SELECT absence.*, prof.* 
+            FROM absence
+            INNER JOIN prof ON absence.ext_prof = prof.id_prof 
+            WHERE absence.ext_user = :id_user
+            ORDER BY STR_TO_DATE(absence.date_abs, '%Y-%m-%d') DESC, STR_TO_DATE(absence.heure_debut, '%H:%i') DESC";
+
+$stmt = $db->prepare($requete);
+$stmt->bindParam(':id_user', $id_user_connecte, PDO::PARAM_INT);
+$stmt->execute();
+$resultats = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
+<section class="absences">
+    <h1>Mes Absences</h1>
 
-    <section class="absences">
+    <div class="containerAbs">
+        <div class="top">
+            <p>Etat</p>
+            <p>Heures manquées : </p>
+            <p>Justification</p>
+        </div>
+        <hr>
 
-        <h1>Mes Absences</h1>
+        <?php
+        // Définir la locale en français
+        setlocale(LC_TIME, 'fr_FR');
 
-        <div class="containerAbs">
+        $totalHeuresAbsences = 0;
 
-            <div class="top">
-                <p>Etat</p>
-                <p>Heures manquées : </p>
-                <p>Justification</p>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="left">
-                    <img src="img/prof1.jpg" alt="">
-                    <div class="text">
-                        <p>Mar. 8 Janvier 15h45 à 17h45</p>
-                        <p>Absence du cours de M.Leroy </p>
-                    </div>
+        foreach ($resultats as $absence) {
+            $dateDebut = new DateTime($absence["date_abs"] . ' ' . $absence["heure_debut"]);
+            $dateFin = new DateTime($absence["date_abs"] . ' ' . $absence["heure_fin"]);
 
-                </div>
+                // Calculer la durée
+    $difference = $dateDebut->diff($dateFin);
+    $duree = $difference->format('%Hh%i');
 
-                <div class="heure">
-                    <p>2h</p>
-                </div>
+    // Ajouter la durée à la variable cumulatrice
+    list($heures, $minutes) = explode('h', $duree);
+    $totalHeuresAbsences += $heures + $minutes / 60;
 
-                <div class="btn">
-                    <a href=""> Ajouter </a>
-                    <a href=""> Modifier </a>
-                </div>
-            </div>
+            // Convertir la date en format timestamp si elle n'est pas déjà sous ce format
+            $timestamp = strtotime($absence["date_abs"]);
+            // Formater la date en français et l'heure
+            $date = new DateTime();
+            $date->setTimestamp($timestamp);
+
+            $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+            $dateFormatee = $formatter->format($date);
+
+            $heureDebutFormatee = $dateDebut->format('H\hi');
+            $heureFinFormatee = $dateFin->format('H\hi');
+
+            // Afficher les informations du professeur lié à l'absence
+            $professeur = $absence["nom"] . " " . $absence["prenom"];
+
+            // Calculer la durée
+            $difference = $dateDebut->diff($dateFin);
+            $duree = $difference->format('%Hh%i');
+
+            echo ("<div class='row'>
+               <div class='left'>
+                   <img src='{$absence["img_profile"]}' alt='' class='pp_prof'>
+                   <div class='text'>
+                       <p> {$dateFormatee}, {$heureDebutFormatee} à {$heureFinFormatee}</p>
+                       <p>Absence du cours de {$professeur} </p>
+                   </div>
+               </div>
+
+               <div class='heure'>
+                   <p>{$duree}</p>
+               </div>
+
+               <div class='btn'>
+                   <a href=''> Ajouter </a>
+                   <a href=''> Modifier </a>
+               </div>
+           </div>
+           <hr>");
+// Formater le total des heures d'absences
+$totalHeuresFormate = sprintf('%02d', floor($totalHeuresAbsences)) . 'h' . sprintf('%02d', ($totalHeuresAbsences * 60) % 60);
+        }
+?>
+    </div>
+
+    <hr>
+
+    <div class="totAbs">
+
+        <p>Total d'heures d'absences : <span><?php echo $totalHeuresFormate; ?></span></p>
+        
+    </div>
+</section>
 
 
-            <hr>
-            <div class="row">
-                <div class="left">
-                    <img src="img/prof2.jpg" alt="">
-                    <div class="text">
-                        <p>Mar. 8 Janvier 15h45 à 17h45</p>
-                        <p>Absence du cours de M.Leroy </p>
-                    </div>
-
-                </div>
-
-                <div class="heure">
-                    <p>2h</p>
-                </div>
-
-                <div class="btn">
-                    <a href=""> Ajouter </a>
-                    <a href=""> Modifier </a>
-                </div>
-            </div>
-
-
-            <hr>
-            <div class="row">
-                <div class="left">
-                    <img src="img/prof3.jpg" alt="">
-                    <div class="text">
-                        <p>Mar. 8 Janvier 15h45 à 17h45</p>
-                        <p>Absence du cours de M.Leroy </p>
-                    </div>
-
-                </div>
-
-                <div class="heure">
-                    <p>2h</p>
-                </div>
-
-                <div class="btn">
-                    <a href=""> Ajouter </a>
-                    <a href=""> Modifier </a>
-                </div>
-            </div>
 
 
         </div>

@@ -68,6 +68,8 @@ h1 {
 .profil img {
     width: 100px;
     height: 100px;
+    object-fit: cover;
+    object-position: 100% 0;
     border-radius: 50%;
 }
 

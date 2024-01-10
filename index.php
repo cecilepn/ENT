@@ -95,9 +95,7 @@ include ("header.php");
 
 
         <?php         
-            $requete = "SELECT * FROM `actualite` ORDER BY `actualite`.`date_actu` DESC LIMIT 3
-
-            ";
+            $requete = "SELECT * FROM `actualite` ORDER BY `actualite`.`date_actu` DESC LIMIT 3";
             $stmt = $db->query($requete);
             $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
