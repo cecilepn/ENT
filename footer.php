@@ -1,5 +1,5 @@
 
-<footer>
+<footer role="footer">
         <div><a href="index.php"><img src="./img/logofooter.png" alt=""> <span class="sr-only"> Logo
                     accueil
                 </span></a>

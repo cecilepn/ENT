@@ -41,7 +41,7 @@
 
             <form action="traite_login.php" method="GET">
                 <label>Adresse Mail</label>
-                <input type="text" placeholder="Entrer l'adresse mail" name="mail" required> 
+                <input type="text" placeholder="Entrer l'adresse mail" name="mail" autocomplete="email" required> 
 
                 <?php 
 if (isset($_GET["err"]) && $_GET["err"]=="mail") { echo "Erreur sur l'adresse mail.";}

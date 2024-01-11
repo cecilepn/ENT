@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="index.css">
 
-    <link rel="icon" type="image/png" href="./img/logo.png" />
+    <link rel="icon" type="image/png" href="./img/logo.png" alt=""/>
 
     <?php
 include ("db_connect.php");
@@ -121,7 +121,7 @@ include ("header.php");
                     <div class='new'>
                         <h4>{$art["titre"]}</h4>
                         <p>{$extrait}</p>
-                        <a href='article.php?id_actu={$art["id_actu"]}'>Lire plus...</a>
+                        <a href='article.php?id_actu={$art["id_actu"]}' aria-label='Lire la suite : {$art["titre"]}'>Lire plus...</a>
                     </div>
                 </div>
             ");
@@ -166,7 +166,7 @@ include ("header.php");
     <section class="menuCrous">
 
         <div class="top">
-            <h6> Menu </h6>
+            <h5> Menu </h6>
         </div>
 
         <div class="bloc topB">

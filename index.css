@@ -148,7 +148,7 @@ h2 {
 }
 
 .frame2 a {
-    color: inherit;
+    color: var(--black);
     font-weight: 600;
     font-size: 1.2em;
     display: flex;
@@ -326,7 +326,7 @@ h5 {
     margin-bottom: 104px;
 }
 
-h6 {
+h5 {
     font-size: 6em;
     text-transform: uppercase;
 }

@@ -38,6 +38,7 @@ body {
     --purple: #D6C5F3;
     --orange: #FF906F;
     --green: #4A7D53;
+    --blue: #50758C;
 }
 
 /* thème sombre / clair */
@@ -146,7 +147,7 @@ nav {
 }
 
 .deco {
-    color: var(--orange);
+    color: var(--blue);
 }
 
 .deco:hover {

@@ -1,7 +1,7 @@
 <?php
 include ("db_connect.php");
 ?>
-<header>
+<header role="banner">
         <div class="logo"><a href="index.php">
             
         <svg width="38" height="38" viewBox="0 0 38 38" fill="none"
@@ -29,7 +29,7 @@ include ("db_connect.php");
                         </clipPath>
                     </defs>
                 </svg>
-                <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"
+                <svg width="38" height="38" viewBox="0 0 38 38" fill="none" role="img" aria-label="Accueil" focusable="false" xmlns="http://www.w3.org/2000/svg"
                     class="dark">
                     <g clip-path="url(#clip0_334_2404)">
                         <path
@@ -58,8 +58,8 @@ include ("db_connect.php");
                 </span></a>
         </div>
 
-        <div id="burger-menu">
-            <div class="burger">
+        <div id="burger-menu" aria-label="Ouvrir le menu">
+            <div class="burger" alt="menu mobile">
             <iconify-icon icon="eva:menu-fill" width="30px" ></iconify-icon>
             </div>
 
@@ -70,8 +70,8 @@ include ("db_connect.php");
         </div>
         <div class="containNav" id="menu">
 
-        <div class="navMobile">
-            <nav>
+        <div class="navMobile" >
+            <nav role="navigation" aria-label="Menu principal">
                 <a id="item" href="index.php"> Accueil </a>
                 <a href="ressources.php"> Mes Ressources </a>
                 <a href="suivi.php"> Suivi scolarité </a>
