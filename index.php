@@ -15,6 +15,7 @@
 
 
     <link rel="stylesheet" href="index.css">
+
     <link rel="icon" type="image/png" href="./img/logo.png" />
 
     <?php
@@ -33,7 +34,10 @@ include ("header.php");
 
 
 <section class="landing">
-        <h1> Bienvenue <br><span> <?php echo "{$_SESSION["prenom"]}" ?> </span> </h1>
+        <h1> Bienvenue <br><?php if(isset($_SESSION["prenom"])) {
+    echo '<span>' . $_SESSION["prenom"] . '</span>';
+}
+?> </h1>
 
         <div>
             <ul>
@@ -128,7 +132,7 @@ include ("header.php");
 </div>
     </section>
 
-    <section class="videos">
+    <!-- <section class="videos">
 
         <div class="blocVideo">
             <iframe width="600" height="400" src="https://www.youtube.com/embed/8uVHEAaj75A?si=m82koOJNTXVClQib"
@@ -156,7 +160,7 @@ include ("header.php");
 
         </div>
 
-    </section>
+    </section> -->
 
 
     <section class="menuCrous">

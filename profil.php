@@ -151,7 +151,7 @@
                 </div>
             </div>
 
-            <div><img src="img/qr.png" alt=""></div>
+            <div><img src="img/qr.png" alt="" class="qr"></div>
 
             <div> <a href="" class="btn"> Modifier son profil </a></div>
         </div>

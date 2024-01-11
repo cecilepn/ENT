@@ -128,3 +128,70 @@ h5 {
     font-size: 1.5em;
     font-weight: 600;
 }
+
+/* responsive */
+
+@media screen and (max-width: 1024px) {
+    h1 {
+        font-size: 4em;
+    }
+
+    .cours {
+        gap: 24px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    h1 {
+        font-size: 3em;
+    }
+
+    .cours {
+        gap: 16px;
+    }
+
+    .containerDay {
+        gap: 16px;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+
+    .top {
+        flex-direction: column;
+        gap: 32px;
+
+    }
+
+    .blocTitre {
+        padding: 0px 24px;
+    }
+
+    .titleCalendrier {
+        padding: 0px;
+        flex-wrap: wrap;
+    }
+
+    .week {
+        padding: 0px 24px;
+
+
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        text-align: center;
+    }
+
+    h3,
+    h4 {
+        font-size: 3em !important;
+    }
+
+    .week,
+    .top {
+        justify-content: center !important;
+    }
+}

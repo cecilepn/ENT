@@ -92,165 +92,94 @@ include ("db_connect.php");
 
     <section class="agenda">
 
-        <div class="titleAgenda">
-            <h6> Janvier </h6>
-            <div class="icons">
-                <iconify-icon icon="maki:arrow" width="32" height="32" flip="horizontal"></iconify-icon>
-                <iconify-icon icon="maki:arrow" width="32" height="32"></iconify-icon>
-                <iconify-icon icon="fluent:calendar-28-regular" width="32" height="32" flip="horizontal"></iconify-icon>
-            </div>
-        </div>
+<?php
+// Initialiser la variable pour le mois par défaut (le mois actuel)
+$mois_selectionne = date('Y-m');
 
+// Si le formulaire a été soumis, il met à jour le mois sélectionné
+if (isset($_POST['mois_selectionne'])) {
+    $mois_selectionne = $_POST['mois_selectionne'];
+}
 
-        <div class="planning">
+// Requête SQL pour récupérer les devoirs filtrés par ext_annee et le mois sélectionné
+$requete_devoir = "SELECT * FROM devoir WHERE ext_annee = :filtre_annee AND DATE_FORMAT(date_dev, '%Y-%m') = :mois_annee_filtre ORDER BY date_dev ASC";
+$stmt_devoir = $db->prepare($requete_devoir);
+$stmt_devoir->bindParam(':filtre_annee', $filtre_annee, PDO::PARAM_STR);
+$stmt_devoir->bindParam(':mois_annee_filtre', $mois_selectionne, PDO::PARAM_STR);
+$stmt_devoir->execute();
 
-            <div class="blocDevoir">
-                <p class="jour">Lundi 7</p>
+$resultat_devoir = $stmt_devoir->fetchAll(PDO::FETCH_ASSOC);
+?>
 
-                <div class="contenu">
+<div class="titleAgenda">
+    <!-- Formulaire pour sélectionner le mois -->
+    <form method="post">
+        <label for="mois_selectionne">Choisir le mois :</label>
+        <input type="month" id="mois_selectionne" name="mois_selectionne" value="<?php echo $mois_selectionne; ?>" />
+        <button class="affiche" type="submit">Afficher</button>
+    </form>
+
+<!-- Afficher le mois sélectionné -->
+<?php
+$date_selectionnee = new DateTime($mois_selectionne . '-01');
+$formatter_selectionnee = new IntlDateFormatter('fr_FR', IntlDateFormatter::NONE, IntlDateFormatter::NONE, null, null, 'MMMM');
+$mois_formatte = $formatter_selectionnee->format($date_selectionnee);
+?>
+<h6> <?php echo $mois_formatte; ?> </h6>
+
+</div>
+
+<div class="planning">
+    <?php
+    if (!empty($resultat_devoir)) {
+        foreach ($resultat_devoir as $devoir) {
+            $timestamp_devoir = strtotime($devoir["date_dev"]);
+            
+            $date = new DateTime();
+            $date->setTimestamp($timestamp_devoir);
+
+            // Formater la date en français
+            $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+            $date_formattee = $formatter->format($date);
+
+            // Formater l'heure
+            $heure_formattee = date('H:i', strtotime($devoir["heure"]));
+
+            echo ("<div class='blocDevoir'>
+                <p class='jour'> {$date_formattee}</p>
+
+                <div class='contenu'>
                     <div>
-                        <p class="devTitre">CV vidéo</p>
+                        <p class='devTitre'>{$devoir["nom_dev"]}</p>
                     </div>
 
-                    <div class="details">
-                        <p> 23:00</p>
-                        <a class="btn" href="">Rendre</a>
+                    <div class='details'>
+                        <p> {$heure_formattee}</p>
+                        <a class='btn' href=''>Rendre</a>
                     </div>
                 </div>
+            </div>");
+        };
+    } else {
+        echo ("<p> Aucun devoir à rendre prochainement </p>");
+    }
+    ?>
+</div>
 
-            </div>
+</section>
 
-            <div class="blocDevoir">
-                <p class="jour">Mardi 8</p>
 
-                <div class="contenu">
-                    <div>
-                        <p class="devTitre">CV vidéo</p>
-                    </div>
 
-                    <div class="details">
-                        <p> 23:00</p>
-                        <a class="btn" href="">Rendre</a>
-                    </div>
-                </div>
 
-            </div>
-
-            <div class="blocDevoir">
-                <p class="jour">Mercredi 10</p>
-
-                <div class="contenu">
-                    <div>
-                        <p class="devTitre">CV vidéo</p>
-                    </div>
-
-                    <div class="details">
-                        <p> 23:00</p>
-                        <a class="btn" href="">Rendre</a>
-                    </div>
-                </div>
-
-                <div class="contenu">
-                    <div>
-                        <p class="devTitre">CV vidéo</p>
-                    </div>
-
-                    <div class="details">
-                        <p> 23:00</p>
-                        <a class="btn" href="">Rendre</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="blocDevoir">
-                <p class="jour">Jeudi 11</p>
-
-                <div class="contenu">
-                    <div>
-                        <p class="devTitre">CV vidéo</p>
-                    </div>
-
-                    <div class="details">
-                        <p> 23:00</p>
-                        <a class="btn" href="">Rendre</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="blocDevoir">
-                <p class="jour">Vendredi 12</p>
-
-                <div class="contenu">
-                    <div>
-                        <p class="devTitre">CV vidéo</p>
-                    </div>
-
-                    <div class="details">
-                        <p> 23:00</p>
-                        <a class="btn" href="">Rendre</a>
-                    </div>
-                </div>
-
-            </div>
-            <div class="blocDevoir">
-                <p class="jour">Lundi 15</p>
-
-                <div class="contenu">
-                    <div>
-                        <p class="devTitre">CV vidéo</p>
-                    </div>
-
-                    <div class="details">
-                        <p> 23:00</p>
-                        <a class="btn" href="">Rendre</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="blocDevoir">
-                <p class="jour">Mardi 16</p>
-
-                <div class="contenu">
-                    <div>
-                        <p class="devTitre">CV vidéo</p>
-                    </div>
-
-                    <div class="details">
-                        <p> 23:00</p>
-                        <a class="btn" href="">Rendre</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="blocDevoir">
-                <p class="jour">Mercredi 17</p>
-
-                <div class="contenu">
-                    <div>
-                        <p class="devTitre">CV vidéo</p>
-                    </div>
-
-                    <div class="details">
-                        <p> 23:00</p>
-                        <a class="btn" href="">Rendre</a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </section>
         <?php
 include ("footer.php");
 ?>
 
 
-<script src="script.js"></script>
+
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+<script src="script.js"></script>
 </body>
 
 

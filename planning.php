@@ -24,7 +24,7 @@ include ("header.php");
 
         <div class="top">
             <h1>Planning journée </h1>
-            <iconify-icon icon="ion:arrow-up" width="90" flip="vertical"></iconify-icon>
+            <iconify-icon icon="ion:arrow-up" width="90" flip="vertical" class="fleche"></iconify-icon>
         </div>
 
         <div class="containerDay">
@@ -259,6 +259,8 @@ include ("header.php");
     </footer>
 
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+    <script src="script.js"></script>
 
 </body>
 

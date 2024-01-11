@@ -57,7 +57,20 @@ include ("db_connect.php");
                 <span class="sr-only"> Logo accueil
                 </span></a>
         </div>
-        <div class="containNav">
+
+        <div id="burger-menu">
+            <div class="burger">
+            <iconify-icon icon="eva:menu-fill" width="30px" ></iconify-icon>
+            </div>
+
+            <div class="croix">
+            <iconify-icon icon="maki:cross" width="30px" ></iconify-icon>
+            </div>
+            
+        </div>
+        <div class="containNav" id="menu">
+
+        <div class="navMobile">
             <nav>
                 <a id="item" href="index.php"> Accueil </a>
                 <a href="ressources.php"> Mes Ressources </a>
@@ -66,7 +79,7 @@ include ("db_connect.php");
                 <a href="messagerie.php"> Messagerie </a>
             </nav>
 
-            <div>
+            <div class="switch">
                 <form>
                     <span class="sr-only"> <label for="themeSwitch">Theme Switch</label></span>
                     <input type="checkbox" id="themeSwitch">
@@ -85,55 +98,61 @@ include ("db_connect.php");
                 </label>
             </div>
 
+
             <?php
 
-    // Vérifier si l'utilisateur est connecté
-    if (isset($_SESSION["login"])) {
-        // Récupérer les informations de l'utilisateur depuis la base de données
-        $requete = "SELECT * FROM utilisateur WHERE user_login=:login";
-        $stmt = $db->prepare($requete);
-        $stmt->bindParam(':login', $_SESSION["login"], PDO::PARAM_STR);
-        $stmt->execute();
+// Si l'utilisateur n'est pas connecté
+if (!isset($_SESSION["login"])) {
+    ?>
+    <div class="position-bg">
+        <a class="deco" href="connexion.php"> Connexion </a>
+    </div>
+    <?php
+} else {
+    // L'utilisateur est connecté
+    // Récupérer les informations de l'utilisateur depuis la base de données
+    $requete = "SELECT * FROM utilisateur WHERE user_login=:login";
+    $stmt = $db->prepare($requete);
+    $stmt->bindParam(':login', $_SESSION["login"], PDO::PARAM_STR);
+    $stmt->execute();
 
-        // Vérifier si la requête a retourné un résultat
-        if ($stmt->rowCount() == 1) {
-            $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
+    // Vérifier si la requête a retourné un résultat
+    if ($stmt->rowCount() == 1) {
+        $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            ?>
-            <div>
-                <a href="profil.php">
-                    <?php if ($utilisateur["img_profile"] !== NULL) { ?>
-                        <img src="<?php echo $utilisateur["img_profile"]; ?>" alt="" class="pp">
-                    <?php } else { ?>
-                        <div> <iconify-icon icon="iconoir:profile-circle" width="30"></iconify-icon> </div>
-                    <?php } ?>
-                    <span class="sr-only"> Profil </span>
-                </a>
-            </div>
-            <div>
-                <a class="deco" href="logout.php"> Déconnexion </a>
-            </div>
-            <?php
+        ?>
+        <div class="position-bg">
+            <a href="profil.php">
+                <?php if ($utilisateur["img_profile"] !== NULL) { ?>
+                    <img src="<?php echo $utilisateur["img_profile"]; ?>" alt="" class="pp">
+                <?php } else { ?>
+                    <div> <iconify-icon icon="iconoir:profile-circle" width="30"></iconify-icon> </div>
+                <?php } ?>
+                <span class="sr-only"> Profil </span>
+            </a>
+        </div>
+        <div class="position-bg">
+            <a class="deco" href="logout.php"> Déconnexion </a>
+        </div>
+        <?php
         // Vérifier si l'utilisateur a le rôle égal à 1 soit admin
         if ($utilisateur["ext_role"] == 1) {
             ?>
-            <div>
+            <div class="position-bg">
                 <a class="back" href="./backoffice/backoffice.php"> Backoffice </a>
             </div>
             <?php
         }
-    } 
-} else {
-    // L'utilisateur n'est pas connecté
-    ?>
-    <div>
-        <a class="deco" href="connexion.php"> Connexion </a>
-    </div>
-    <?php
-}
+    }
+}; 
+
 ?>
 
+
+
+<script src="burger.js"></script>
+<!-- CDN iconify -->
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-<script src="script.js"></script>
+
 
 </header>

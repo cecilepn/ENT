@@ -173,6 +173,7 @@ h5 {
 
 .titleAgenda {
     display: flex;
+    flex-direction: row-reverse;
     align-items: center;
     justify-content: space-between;
     padding: 0px 96px;
@@ -190,6 +191,39 @@ h6 {
     font-weight: 800;
     text-transform: uppercase;
 }
+
+/* form choix du mois */
+
+#mois_selectionne {
+    border: solid 1px;
+    border-color: inherit;
+    padding: 16px 24px;
+    font-family: 'Roboto', sans-serif;
+    text-transform: capitalize;
+}
+
+.affiche {
+    background-color: inherit;
+    border: solid 1px;
+    border-color: inherit;
+    border-radius: 32px;
+    padding: 16px 24px;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+.affiche:hover {
+    background-color: var(--purple);
+    color: inherit;
+}
+
+form {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+
 
 /* bloc planning */
 
@@ -240,4 +274,73 @@ h6 {
     display: flex;
     flex-direction: column;
     gap: 16px;
+}
+
+/* responsive */
+
+@media (max-width : 910px) {
+
+    .blocTitre {
+        padding: 48px;
+    }
+
+    .filtre {
+        padding: 16px 32px;
+    }
+
+    .premier,
+    .planning {
+        padding: 0px 48px;
+
+    }
+}
+
+@media (max-width : 849px) {
+
+    .blocTitre {
+        padding: 0px;
+        margin: 24px;
+    }
+
+    h1 {
+        font-size: 3em;
+    }
+
+    h2 {
+        font-size: 1em;
+    }
+
+
+    h3,
+    h5 {
+        font-size: 2.5em !important;
+    }
+
+    h4 {
+        font-size: 1.5em !important;
+    }
+
+    h6 {
+        font-size: 2em;
+    }
+
+    .filtre {
+        padding: 8px 16px;
+    }
+
+    .titleAgenda {
+        padding: 0px 48px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width:600px) {
+
+    .containFiltres {
+        flex-direction: column;
+    }
+
 }
